@@ -1,23 +1,33 @@
 #!/bin/bash -x
-fulltime=1
-parttime=2
-wageperhr=20
-parthrs=8
-fullhrs=16
-attan=$((RANDOM%3))
-case $attan in 
-$fulltime)
-        wage=$((wageperhr*fullhrs))
-        echo $wage
-	;;
-$parttime)
-        wage=$((wageperhr*parthrs))
-        echo $wage
-	;;
-*)
-	echo "absent"
-	;;
+parttime=1
+fulltime=2
+rateperhr=20
+maxdays=20
+maxhr=50
+days=0
+while [[ $days -lt $maxdays ]]
+do
+((days++))
+empcheck=$((RANDOM%3))
+
+case $empcheck in
+        $parttime)
+                ((emphr+=4))
+                ;;
+        $fulltime)
+                 ((emphr+=8))
+                ;;
+
+                *)
+                  ((emphr+=0))
+                ;;
 esac
+        salary=$(($rateperhr*$emphr))
+        totsalary=$(($totsalary+$salary))
+done
+
+
+
 
 
 
