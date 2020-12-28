@@ -1,19 +1,23 @@
 #!/bin/bash -x
+fulltime=1
+parttime=2
 wageperhr=20
 parthrs=8
 fullhrs=16
 attan=$((RANDOM%3))
-if [[ $attan -eq 1 ]]
-then
+case $attan in 
+$fulltime)
         wage=$((wageperhr*fullhrs))
         echo $wage
-elif [[ $attan -eq 2 ]]
-then
+	;;
+$parttime)
         wage=$((wageperhr*parthrs))
         echo $wage
-else
- echo "absent"
-fi
+	;;
+*)
+	echo "absent"
+	;;
+esac
 
 
 
