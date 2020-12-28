@@ -5,7 +5,7 @@ rateperhr=20
 maxdays=20
 maxhr=50
 days=0
-while [[ $days -lt $maxdays ]]
+while [[ $days -lt $maxdays && $emphr -lt $maxhr ]]
 do
 ((days++))
 empcheck=$((RANDOM%3))
@@ -25,6 +25,7 @@ esac
         salary=$(($rateperhr*$emphr))
         totsalary=$(($totsalary+$salary))
 done
+
 
 
 
