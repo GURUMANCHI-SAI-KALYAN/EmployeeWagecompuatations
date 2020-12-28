@@ -6,6 +6,7 @@ maxdays=20
 maxhr=50
 days=0
 emphr=0
+declare -A dailywage
 function EmployHrs() {
         local empcheck=$1
         case $empcheck in
@@ -31,14 +32,14 @@ while [[ $days -lt $maxdays && $emphr -lt $maxhr ]]
 do
         ((days++))
         emphr="$( EmployHrs $((RANDOM%3)) )"
-        dalywage[$days]="$( GetEmpWage $emphr )"
+        dailywage["day" $days]="$( GetEmpWage $emphr )"
         salary="$( GetEmpWage $emphr )"
         totsalary=$((totsalary+salary))
 done
 #totsalary=$((totsalary+salary))
 echo $totsalary
-echo ${dalywage[@]}
-
+echo ${dailywage[@]}
+echo ${!dailywage[@]}
 
 
 
