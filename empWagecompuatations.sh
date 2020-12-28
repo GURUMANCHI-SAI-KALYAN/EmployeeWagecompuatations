@@ -1,4 +1,3 @@
-#!/bin/bash -x
 #! /bin/bash -x
 parttime=1
 fulltime=2
@@ -7,7 +6,7 @@ maxdays=20
 maxhr=50
 days=0
 emphr=0
-function employhrs() {
+function EmployHrs() {
         local empcheck=$1
         case $empcheck in
         $parttime)
@@ -23,14 +22,22 @@ function employhrs() {
         esac
         echo $emphr
 }
+function GetEmpWage() {
+local Emphrs=$1
+echo $((rateperhr*emphr))
+}
 
 while [[ $days -lt $maxdays && $emphr -lt $maxhr ]]
 do
         ((days++))
-        emphr="$( employhrs $((RANDOM%3)) )"
-        salary=$((rateperhr*emphr))
+        emphr="$( EmployHrs $((RANDOM%3)) )"
+        dalywage[$days]="$( GetEmpWage $emphr )"
+        salary="$( GetEmpWage $emphr )"
         totsalary=$((totsalary+salary))
 done
+#totsalary=$((totsalary+salary))
+echo $totsalary
+echo ${dalywage[@]}
 
 
 
